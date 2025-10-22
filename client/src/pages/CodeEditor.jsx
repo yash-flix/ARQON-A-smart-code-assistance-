@@ -67,9 +67,8 @@ function CodeEditor() {
         language
       });
 
-      if (response.data.success) {
-        setAnalysis(response.data.data.analysis);
-      }
+      // ✅ Fixed: Backend returns analysis directly
+      setAnalysis(response.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to analyze code');
     } finally {
@@ -139,7 +138,7 @@ function CodeEditor() {
               fontFamily: "'Poppins', 'Inter', sans-serif"
             }}
           >
-            AI Code Assistant
+            ARQON- Code Analysis 
           </Typography>
           <Typography 
             variant="body1" 
@@ -337,6 +336,7 @@ function CodeEditor() {
                   </Alert>
                 )}
 
+                {/* ✅ Enhanced Loading Screen */}
                 {loading && (
                   <Box sx={{ 
                     display: 'flex', 
@@ -345,19 +345,53 @@ function CodeEditor() {
                     alignItems: 'center', 
                     minHeight: 400 
                   }}>
-                    <CircularProgress 
-                      size={60}
-                      thickness={4}
+                    <Box sx={{ position: 'relative', display: 'inline-flex', mb: 3 }}>
+                      <CircularProgress 
+                        size={70}
+                        thickness={3}
+                        sx={{ 
+                          color: '#667eea',
+                          animation: 'pulse 2s ease-in-out infinite',
+                          '@keyframes pulse': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.5 }
+                          }
+                        }} 
+                      />
+                      <Box
+                        sx={{
+                          top: 0,
+                          left: 0,
+                          bottom: 0,
+                          right: 0,
+                          position: 'absolute',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <CodeIcon sx={{ color: '#667eea', fontSize: 30 }} />
+                      </Box>
+                    </Box>
+                    <Typography 
                       sx={{ 
-                        color: '#667eea',
-                        mb: 3
-                      }} 
-                    />
-                    <Typography sx={{ 
-                      color: 'rgba(255, 255, 255, 0.6)',
-                      fontFamily: "'Inter', sans-serif"
-                    }}>
-                      Analyzing your code...
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        fontFamily: "'Inter', sans-serif",
+                        fontWeight: 500,
+                        mb: 1,
+                        fontSize: '1.1rem'
+                      }}
+                    >
+                      Analyzing with Groq AI...
+                    </Typography>
+                    <Typography 
+                      sx={{ 
+                        color: 'rgba(255, 255, 255, 0.4)',
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '0.9rem'
+                      }}
+                    >
+                      This may take a few seconds
                     </Typography>
                   </Box>
                 )}

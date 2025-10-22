@@ -15,25 +15,25 @@ const codeAnalysisSchema = new mongoose.Schema({
     required: true,
     default: 'javascript'
   },
-  analysis: {
-    bugs: [{
-      line: Number,
-      severity: String,
-      message: String,
-      suggestion: String
-    }],
-    qualityScore: {
-      type: Number,
-      min: 0,
-      max: 100
-    },
-    suggestions: [String],
-    complexity: String
+  // ✅ Flatten the structure - remove nested 'analysis' object
+  bugs: [{
+    line: Number,
+    severity: String,
+    message: String,
+    suggestion: String
+  }],
+  qualityScore: {
+    type: Number,
+    min: 0,
+    max: 100
   },
+  suggestions: [String],
+  complexity: String,
+  securityIssues: [String], // ✅ Added this field
   status: {
     type: String,
     enum: ['pending', 'completed', 'failed'],
-    default: 'pending'
+    default: 'completed' // ✅ Changed default
   },
   createdAt: {
     type: Date,

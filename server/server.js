@@ -26,24 +26,33 @@ app.get('/api/health', (req, res) => {
     status: 'Server is running!', 
     timestamp: new Date(),
     mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
-    ai: process.env.GEMINI_API_KEY ? 'Gemini API Configured' : 'No AI API Key'
+    ai: process.env.GROQ_API_KEY ? 'Groq AI Configured' : 'No AI API Key'
   });
 });
 
-// Quick Gemini test route
+// Quick Groq test route
 app.post('/api/test-ai', async (req, res) => {
   try {
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const Groq = require('groq-sdk');
+    const groq = new Groq({
+      apiKey: process.env.GROQ_API_KEY
+    });
     
     const prompt = req.body.prompt || 'Say hello!';
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
+    
+    const completion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      model: "llama-3.3-70b-versatile",
+    });
     
     res.json({
       success: true,
-      response: response.text()
+      response: completion.choices[0]?.message?.content
     });
   } catch (error) {
     res.status(500).json({
@@ -57,7 +66,7 @@ app.post('/api/test-ai', async (req, res) => {
 app.use('/api/auth', authRoutes);  
 app.use('/api/code', codeRoutes);
 
-// 404 handler (optional but good practice)
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -88,12 +97,12 @@ const startServer = async () => {
   // Connect to database
   await connectDB();
 
-  // Check Gemini API key
-  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_gemini_api_key_here') {
-    console.log('⚠️  Warning: Gemini API key not configured');
-    console.log('📝 Get your free key from: https://makersuite.google.com/app/apikey');
+  // Check Groq API key
+  if (!process.env.GROQ_API_KEY) {
+    console.log('⚠️  Warning: Groq API key not configured');
+    console.log('📝 Get your free key from: https://console.groq.com/keys');
   } else {
-    console.log('✅ Gemini API configured');
+    console.log('✅ Groq AI configured');
   }
 
   // Start Express server
