@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-const authRoutes = require('./routes/authRoutes');  // ✅ ADD THIS
+const authRoutes = require('./routes/authRoutes');  
 const codeRoutes = require('./routes/codeRoutes');
 
 // Load environment variables
@@ -54,7 +54,7 @@ app.post('/api/test-ai', async (req, res) => {
 });
 
 // Routes
-app.use('/api/auth', authRoutes);  // ✅ ADD THIS
+app.use('/api/auth', authRoutes);  
 app.use('/api/code', codeRoutes);
 
 // 404 handler (optional but good practice)

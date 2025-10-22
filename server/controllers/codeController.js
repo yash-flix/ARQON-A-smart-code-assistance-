@@ -136,7 +136,7 @@ exports.getHistory = async (req, res) => {
     const analyses = await CodeAnalysis.find({ userId: req.user._id })
       .sort({ createdAt: -1 })
       .limit(20)
-      .select('-code'); // Don't send full code in list
+      .select('-code'); 
 
     res.status(200).json({
       success: true,

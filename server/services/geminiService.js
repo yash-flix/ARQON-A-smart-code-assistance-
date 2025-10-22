@@ -1,11 +1,11 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-// ✅ Initialize Gemini AI only if API key is valid
+//  Initialize Gemini AI only if API key is valid
 let genAI, model;
 const hasValidKey =
   process.env.GEMINI_API_KEY &&
-  process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here' &&
-  process.env.GEMINI_API_KEY.startsWith('AIza');
+  process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here' 
+ 
 
 if (hasValidKey) {
   genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -15,7 +15,7 @@ if (hasValidKey) {
 }
 
 class GeminiService {
-  // ⚙️ MOCK ANALYSIS — Used when no valid API key
+  // MOCK ANALYSIS — Used when no valid API key
   getMockAnalysis(code, language) {
     console.log('⚠️  Using MOCK data - Add valid Gemini API key for real AI analysis');
 
@@ -94,7 +94,7 @@ class GeminiService {
     };
   }
 
-  // 🧠 REAL AI ANALYSIS
+  //  REAL AI ANALYSIS
   async analyzeCode(code, language = 'javascript') {
     if (!hasValidKey) return this.getMockAnalysis(code, language);
 
@@ -149,7 +149,7 @@ Return ONLY valid JSON in this exact format:
     }
   }
 
-  // 🔧 FIX BUGS
+  //  FIX BUGS
   async fixBug(code, bugDescription, language = 'javascript') {
     if (!hasValidKey) {
       return {
@@ -203,7 +203,7 @@ Return as JSON:
     }
   }
 
-  // 📘 GENERATE DOCUMENTATION
+  //  GENERATE DOCUMENTATION
   async generateDocs(code, language = 'javascript') {
     if (!hasValidKey) {
       return `/**
