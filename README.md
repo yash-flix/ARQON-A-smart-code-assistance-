@@ -26,7 +26,7 @@ An AI-powered code analysis and assistance platform built with the MERN stack an
 - Node.js
 - Express.js
 - MongoDB with Mongoose
-- Google Gemini AI API
+- Groq AI API
 - JWT Authentication
 - bcryptjs
 
