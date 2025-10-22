@@ -100,7 +100,7 @@ function Documentation() {
                 fontFamily: "'Poppins', 'Inter', sans-serif"
               }}
             >
-              AEQON - Documentation Generator
+              ARQON - Documentation Generator
             </Typography>
           </Box>
           <Typography 
