@@ -34,7 +34,7 @@ An AI-powered code analysis and assistance platform built with the MERN stack an
 
 - Node.js (v16 or higher)
 - MongoDB (local or Atlas)
-- Google Gemini API Key
+- Grpq API key
 
 ## Installation
 
@@ -69,10 +69,10 @@ copy .env.example .env
 
 text
 
-### 4. Get Your Gemini API Key
+### 4. Get YourGrq API Key
 
-1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
-2. Sign in with your Google account
+1. Go to (https://console.groq.com/keys)
+2. Sign in with your  account
 3. Click "Create API Key"
 4. Copy the key and paste it in `server/.env`
 
@@ -120,7 +120,7 @@ ARQON/
 │ ├── middleware/ # Auth middleware
 │ ├── models/ # MongoDB models
 │ ├── routes/ # API routes
-│ ├── services/ # AI services (Gemini)
+│ ├── services/ # AI services (Groq)
 │ └── server.js # Entry point
 │
 └── README.md
@@ -147,7 +147,7 @@ text
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-GEMINI_API_KEY=your_gemini_api_key
+GROQ_API_KEY=your_groq_api_key
 CLIENT_URL=http://localhost:5173
 
 text
@@ -173,7 +173,7 @@ MIT License
 
 ## Acknowledgments
 
-- Google Gemini AI for code analysis capabilities
+- Groq AI for code analysis capabilities
 - MongoDB for database services
 - Material-UI for beautiful UI components
 
