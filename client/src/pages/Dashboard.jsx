@@ -56,14 +56,14 @@ function Dashboard() {
       icon: <BugReport sx={{ fontSize: 32 }} />,
       title: 'Bug Fixer',
       description: 'AI-powered bug detection and automated fixing',
-      action: () => navigate('/code-editor'),
+      action: () => navigate('/bug-fixer'),
       gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
     },
     {
       icon: <Description sx={{ fontSize: 32 }} />,
       title: 'Documentation',
       description: 'Generate comprehensive code documentation automatically',
-      action: () => navigate('/code-editor'),
+      action: () => navigate('/documentation'),
       gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
     }
   ];

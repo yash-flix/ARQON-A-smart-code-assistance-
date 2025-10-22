@@ -4,7 +4,7 @@ const {
   fixBug,
   generateDocs,
   getHistory,
-  
+  getAnalysis
 } = require('../controllers/codeController');
 const { protect, checkApiLimit } = require('../middleware/auth');
 
@@ -20,6 +20,6 @@ router.post('/generate-docs', checkApiLimit, generateDocs);
 
 // History routes
 router.get('/history', getHistory);
-
+router.get('/analysis/:id', getAnalysis);
 
 module.exports = router;
